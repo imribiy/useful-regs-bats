@@ -47,6 +47,7 @@ sc config diagtrack start=disabled
 sc config dssvc start=disabled
 sc config dusmsvc start=disabled
 sc config diagsvc start=disabled
+sc config telemetry start=disabled
 sc config diagnosticshub.standardcollector.service start=disabled
 ::Disabling ndu can cause problem if you are using mobile hotspot.
 sc config ndu start=disabled
