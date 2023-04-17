@@ -53,10 +53,10 @@ sc config diagnosticshub.standardcollector.service start=disabled
 sc config ndu start=disabled
 cls
 
-echo "Disabling ReadyBoost"
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t REG_MULTI_SZ /d "" /f
-sc config rdyboost start=disabled
-cls
+::echo "Disabling ReadyBoost"
+::reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t REG_MULTI_SZ /d "" /f
+::sc config rdyboost start=disabled
+::cls
 
 echo "Disabling Themes"
 ::Delete this segment if you use custom Windows themes.
