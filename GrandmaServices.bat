@@ -3,26 +3,16 @@ title Grandma Services by imribiy#0001
 cls
 
 ::Services that I disable on my grandma's laptop.
-::Tested on W10 only. Shouldn't be a problem for W11 anyways.
 
-goto ifadmin
- 
-:ifadmin 
-    echo Administrative permissions required. Detecting permissions... 
- 
-    net session >nul 2>&1 
-    if %errorLevel% == 0 ( 
-        echo Success: Administrative permissions confirmed.
-	cls
-	goto services
-    ) else ( 
-        echo Failure: Please run this batch file as Administrator. 
-    ) 
- 
-    pause >nul 
-    exit
+cd %systemroot%\system32
+call :IsAdmin
 
-:services
+echo "Disabling Background Apps"
+Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground" /t REG_DWORD /d "2" /f
+Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground_UserInControlOfTheseApps" /f
+Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground_ForceAllowTheseApps" /f
+Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground_ForceDenyTheseApps" /f
+cls
 
 echo "Disabling Font Cache"
 sc config fontcache start=disabled
@@ -53,10 +43,10 @@ sc config diagnosticshub.standardcollector.service start=disabled
 sc config ndu start=disabled
 cls
 
-::echo "Disabling ReadyBoost"
-::reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t REG_MULTI_SZ /d "" /f
-::sc config rdyboost start=disabled
-::cls
+echo "Disabling ReadyBoost"
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t REG_MULTI_SZ /d "" /f
+sc config rdyboost start=disabled
+cls
 
 echo "Disabling Themes"
 ::Delete this segment if you use custom Windows themes.
@@ -102,3 +92,12 @@ cls
 
 echo "Services has been disabled, please reboot your system."
 pause
+
+:IsAdmin
+Reg.exe query "HKU\S-1-5-19\Environment"
+If Not %ERRORLEVEL% EQU 0 (
+ Cls & Echo You must have administrator rights to continue ... 
+ Pause & Exit
+)
+Cls
+goto:eof
