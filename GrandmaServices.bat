@@ -44,6 +44,7 @@ sc config ndu start=disabled
 cls
 
 echo "Disabling ReadyBoost"
+::ReadyBoost technology is a feature from the pre-SSD era of SATA 2 hard drives, which was designed to help USB sticks cache hard drives. Today, this technology is completely redundant, whether you use a hard disk or an SSD.
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t REG_MULTI_SZ /d "" /f
 sc config rdyboost start=disabled
 cls
