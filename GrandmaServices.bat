@@ -14,6 +14,11 @@ Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetApps
 Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground_ForceDenyTheseApps" /f
 cls
 
+echo "Adjusting SvcHostSplitThreshold"
+::Doesn't do anything performance wise but decrease process number, so people like it. You can remove this line, not necessary.
+reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "4294967295" /f
+cls
+
 echo "Disabling Font Cache"
 sc config fontcache start=disabled
 sc config fontcache3.0.0.0 start=disabled
@@ -89,6 +94,10 @@ echo "Disabling OneSync"
 ::The OneSyncSvc synchronizes your Microsoft Account, OneDrive, Windows Mail, Contacts, Calendar and various other Apps. 
 ::Your Mail App and other Apps and services, which are dependent upon this functionality, will not work properly when this service is disabled or not running.
 sc config onesyncsvc start=disabled
+cls
+
+echo "Disabling Beep"
+sc config beep start=disabled
 cls
 
 echo "Services has been disabled, please reboot your system."
