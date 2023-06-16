@@ -2,7 +2,7 @@
 title Grandma Services by imribiy#0001
 cls
 
-::Services that I disable on my grandma's laptop.
+::Services that I disable on my grandma's laptop. So you can too.
 
 cd %systemroot%\system32
 call :IsAdmin
