@@ -1,6 +1,9 @@
 @echo off
 title Runtime Broker Disabler, made by imribiy#0001
 
+echo. Disabling Runtime Broker will break functionality of taskbar such as pinning and unpinning items, wifi list etc.
+echo. Are you sure to disable Runtime Broker?
+echo.
 echo.	Press [D] to Disable Runtimebroker
 echo.	Press [E] to Enable Runtimebroker
 echo.
