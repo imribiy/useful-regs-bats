@@ -45,6 +45,7 @@ sc config diagsvc start=disabled
 sc config telemetry start=disabled
 sc config diagnosticshub.standardcollector.service start=disabled
 ::Disabling ndu can cause problem if you are using mobile hotspot.
+::Disabling ndu also breaks 5GHz wireless.
 sc config ndu start=disabled
 cls
 
