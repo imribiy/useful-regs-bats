@@ -1,5 +1,5 @@
 @echo off
-title Grandma Services by imribiy#0001
+title Grandma Services by imribiy
 cls
 
 ::Services that I disable on my grandma's laptop. So you can too.
