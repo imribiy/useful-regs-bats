@@ -16,6 +16,7 @@ cls
 
 echo "Adjusting SvcHostSplitThreshold"
 ::Doesn't do anything performance wise but decrease process number, so people like it. You can remove this line, not necessary.
+::If you use XBox GameBar you can consider removing this line, https://github.com/ChrisTitusTech/winutil/issues/864
 reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "4294967295" /f
 cls
 
