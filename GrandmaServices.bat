@@ -12,12 +12,13 @@ Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRun
 Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground_UserInControlOfTheseApps" /f
 Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground_ForceAllowTheseApps" /f
 Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground_ForceDenyTheseApps" /f
+sc config bam start=disabled
 cls
 
 echo "Adjusting SvcHostSplitThreshold"
 ::Doesn't do anything performance wise but decrease process number, so people like it. You can remove this line, not necessary.
 ::If you use XBox GameBar you can consider removing this line, https://github.com/ChrisTitusTech/winutil/issues/864
-reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "4294967295" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "3333333333" /f
 cls
 
 echo "Disabling Font Cache"
@@ -50,11 +51,12 @@ sc config diagnosticshub.standardcollector.service start=disabled
 sc config ndu start=disabled
 cls
 
-echo "Disabling ReadyBoost"
+::echo "Disabling ReadyBoost"
+::Not safe to disable anymore (as of 2024)
 ::ReadyBoost technology is a feature from the pre-SSD era of SATA 2 hard drives, which was designed to help USB sticks cache hard drives. Today, this technology is completely redundant, whether you use a hard disk or an SSD.
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t REG_MULTI_SZ /d "" /f
-sc config rdyboost start=disabled
-cls
+::reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t REG_MULTI_SZ /d "" /f
+::sc config rdyboost start=disabled
+::cls
 
 echo "Disabling Themes"
 ::Delete this segment if you use custom Windows themes.
